@@ -24,7 +24,8 @@ pip install pywin32
 ```
 
 3. Run the Script: Open a terminal/command prompt, navigate to the directory where you saved the Python file, and run the script using the following command:
-```python main.py
+```
+python main.py
 ```
 
 4. Dota 2 and Script Interaction: The script will monitor the Dota 2 window state and automatically accept a match when it finds the "Accept" button. The GUI window created by the script will also be displayed when Dota 2 is active.
