@@ -5,11 +5,6 @@
 
 This is a dota 2 python script to auto-accept matches. So you can leave your computer for a second and go drink some water.
 
-### Built With
-
-This is script is built with python with many libraries like
-pyautogui, tkinter, threading, time, win32gui..
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -20,7 +15,7 @@ pyautogui, tkinter, threading, time, win32gui..
 ```
 pip install pyautogui
 pip install pywin32
-
+pip install opencv-python
 ```
 
 3. Run the Script: Open a terminal/command prompt, navigate to the directory where you saved the Python file, and run the script using the following command:
@@ -32,8 +27,15 @@ python main.py
 
 ### Aditional solution
 
-If your script can't find the image due to your language or screen resolution, you will need to change the image "./img/accept.png". Take a screenshot of your accept button and cut it and replace the image with same name.
+If your script can't find the image due to your language or screen resolution, you will need to change the base64 encoded image.
 
 ### Prerequisites
 
-Python, libraries(imports) also you will need Accept.png that matches your resolution.
+Python, libraries(imports)...
+
+
+### How to build it
+
+1. go to the python file directory on cmd
+
+2. pyinstaller --onefile --noconsole main.py
