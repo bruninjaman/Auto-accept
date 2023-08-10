@@ -36,6 +36,10 @@ Python, libraries(imports)...
 
 ### How to build it
 
-1. go to the python file directory on cmd
+1. navigate to script directory on command prompt
 
-2. pyinstaller --onefile --noconsole main.py
+2. Use the code:
+```pyinstaller --onefile --noconsole main.py```
+
+
+(it gives errors due to dll imports at the moment)
