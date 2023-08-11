@@ -29,7 +29,7 @@ class Dota2QueueGUI:
         self.message_label = ttk.Label(self.root, text="", font=("Proxima Nova ExCn Rg", 16), anchor="center", background="#171d25", foreground="white")
         self.message_label.pack(fill="both", expand=True)  # Center both horizontally and vertically
 
-        self.close_label = ttk.Label(self.root, text="Ctrl + X to close", font=("Trajan Pro Bold", 12), anchor="center", background="#171d25", foreground="#818181")
+        self.close_label = ttk.Label(self.root, text="Ctrl + X to close", font=("Trajan Pro Bold", 8), anchor="center", background="#171d25", foreground="#818181")
         self.close_label.pack(fill="both", expand=True)  # Center both horizontally and vertically
 
 
@@ -50,7 +50,7 @@ class Dota2QueueGUI:
         self.message_label.config(text=message)
 
     def look_for_match(self):
-        self.update_message("Waiting for Dota 2 queue to find a match")
+        self.update_message("Ready to Accept Matches")
         while True:
             dota2_window = win32gui.FindWindow(None, "Dota 2")
             if dota2_window != 0 and win32gui.IsWindowVisible(dota2_window) and not win32gui.IsIconic(dota2_window):
@@ -62,7 +62,7 @@ class Dota2QueueGUI:
 
                     time.sleep(3)  # Add a 3-second delay
 
-                    self.update_message("Waiting for Dota 2 queue to find a match")  # Reset status message
+                    self.update_message("Ready to Accept Matches")  # Reset status message
 
     def locate_accept_button(self):
         accept_location = pyautogui.locateCenterOnScreen(self.accept_image, grayscale=True, confidence=0.8)
