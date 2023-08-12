@@ -29,8 +29,11 @@ class Dota2QueueGUI:
         self.message_label = ttk.Label(self.root, text="", font=("Proxima Nova ExCn Rg", 16), anchor="center", background="#171d25", foreground="white")
         self.message_label.pack(fill="both", expand=True)  # Center both horizontally and vertically
 
-        self.close_label = ttk.Label(self.root, text="Ctrl + X to close", font=("Trajan Pro Bold", 8), anchor="center", background="#171d25", foreground="#818181")
-        self.close_label.pack(fill="both", expand=True)  # Center both horizontally and vertically
+        self.close_label_bg = tk.Label(self.root, background="#2b2b2b")
+        self.close_label_bg.pack(fill="both", expand=True)
+
+        self.close_label = ttk.Label(self.close_label_bg, text="Ctrl + X to close", font=("Trajan Pro Bold", 8), anchor="center", background="#0e1218", foreground="#818181")
+        self.close_label.pack(fill="both", expand=True)
 
 
 
