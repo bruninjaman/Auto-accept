@@ -16,6 +16,9 @@ This is a dota 2 python script to auto-accept matches. So you can leave your com
 pip install pyautogui
 pip install pywin32
 pip install opencv-python
+pip install keyboard
+
+pip install pyinstaller
 ```
 
 3. Run the Script: Open a terminal/command prompt, navigate to the directory where you saved the Python file, and run the script using the following command:
@@ -39,7 +42,6 @@ Python, libraries(imports)...
 1. navigate to script directory on command prompt
 
 2. Use the code:
-```pyinstaller --onefile --noconsole main.py```
+```pyinstaller --onefile --noconsole --icon=dota_icon_249739.ico main.py```
 
-
-(it gives errors due to dll imports at the moment)
+OBS: It will give you import errors if you use python from microsoft store.
