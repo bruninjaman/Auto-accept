@@ -8,22 +8,36 @@ from threading import Thread
 import time
 import win32gui
 import base64
+import threading
 from io import BytesIO
 from PIL import Image
 import keyboard  # Import the keyboard library
 
-def on_exit(icon, item):
-    icon.stop()
+class TrayIconThread(threading.Thread):
+    def __init__(self, image, menu):
+        super().__init__()
+        self.image = image
+        self.menu = menu
+        self.icon = None
 
-image = Image.open('dota_icon_249739.ico')
-menu = (pystray.MenuItem('Exit', on_exit),)
+    def run(self):
+        self.icon = pystray.Icon("Auto Accept", self.image, "Auto Accept", self.menu)
+        self.icon.run()
 
-icon = pystray.Icon("Auto Accept", image, "Auto Accept", menu)
-icon.run()
+    def stop(self):
+        if self.icon is not None:
+            self.icon.stop()
+
 class Dota2QueueGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Auto Accept")
+
+        image = Image.open('dota_icon_249739.ico')
+        menu = (pystray.MenuItem('Exit', self.close_application),)
+
+        self.tray_thread = TrayIconThread(image, menu)
+        self.tray_thread.start()
 
 
         # Bind the Ctrl + X key combination to a function that will close the application
@@ -57,6 +71,7 @@ class Dota2QueueGUI:
         self.dota_window_thread.start()
         
     def close_application(self, event=None):
+        self.tray_thread.stop()  # Stop the tray icon
         os._exit(0)
 
     def update_message(self, message):
