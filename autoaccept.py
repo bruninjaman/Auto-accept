@@ -1,5 +1,7 @@
 import os
 import pyautogui
+import pystray
+from PIL import Image
 import tkinter as tk
 from tkinter import ttk
 from threading import Thread
@@ -10,6 +12,14 @@ from io import BytesIO
 from PIL import Image
 import keyboard  # Import the keyboard library
 
+def on_exit(icon, item):
+    icon.stop()
+
+image = Image.open('dota_icon_249739.ico')
+menu = (pystray.MenuItem('Exit', on_exit),)
+
+icon = pystray.Icon("Auto Accept", image, "Auto Accept", menu)
+icon.run()
 class Dota2QueueGUI:
     def __init__(self, root):
         self.root = root

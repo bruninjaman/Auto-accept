@@ -44,4 +44,6 @@ Python, libraries(imports)...
 2. Use the code:
 ```pyinstaller --onefile --noconsole --icon=dota_icon_249739.ico autoaccept.py```
 
+3. copy the icon and put at the same folder as your built autoaccept
+
 OBS: It will give you import errors if you use python from microsoft store.
