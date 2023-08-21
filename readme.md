@@ -42,6 +42,6 @@ Python, libraries(imports)...
 1. navigate to script directory on command prompt
 
 2. Use the code:
-```pyinstaller --onefile --noconsole --icon=dota_icon_249739.ico main.py```
+```pyinstaller --onefile --noconsole --icon=dota_icon_249739.ico autoaccept.py```
 
 OBS: It will give you import errors if you use python from microsoft store.
