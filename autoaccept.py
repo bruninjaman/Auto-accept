@@ -78,7 +78,7 @@ class Dota2QueueGUI:
         while True:
             dota2_window = win32gui.FindWindow(None, "Dota 2")
             if dota2_window and win32gui.IsWindowVisible(dota2_window) and not win32gui.IsIconic(dota2_window):
-                self.accept_coords = pyautogui.locateCenterOnScreen(self.accept_image, grayscale=True, confidence=0.8)
+                self.accept_coords = pyautogui.locateCenterOnScreen(self.accept_image, grayscale=True, confidence=0.57)
                 
                 if self.accept_coords:
                     self.click_accept_button()
