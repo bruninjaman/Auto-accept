@@ -27,16 +27,23 @@ class Dota2QueueGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Auto Accept")
+        self.root.configure(bg="#171d25")
+        self.root.attributes('-alpha', 0.85)
+        self.root.geometry("300x100")
+        self.root.overrideredirect(True)
+        self.root.wm_attributes("-topmost", True)
+        self.root.wm_attributes("-disabled", True)
 
-        image = Image.open(BytesIO(base64.b64decode(TRAY_ICON_BASE64)))
+        # Preload images
+        self.accept_image = Image.open(BytesIO(base64.b64decode(BUTTON_ACCEPT_BASE64)))
+        tray_icon_image = Image.open(BytesIO(base64.b64decode(TRAY_ICON_BASE64)))
+
+        # Create tray icon menu
         menu = (pystray.MenuItem('Exit', self.close_application),)
-        self.tray_thread = TrayIconThread(image, menu)
+        self.tray_thread = TrayIconThread(tray_icon_image, menu)
         self.tray_thread.start()
 
-        keyboard.add_hotkey('ctrl+x', self.close_application)
-        self.accept_image = Image.open(BytesIO(base64.b64decode(BUTTON_ACCEPT_BASE64)))
-
-        self.root.configure(bg="#171d25")
+        # Set up GUI elements
         self.message_label = ttk.Label(self.root, text="", font=("Proxima Nova ExCn Rg", 16), anchor="center", background="#171d25", foreground="white")
         self.message_label.pack(fill="both", expand=True)
         self.close_label_bg = tk.Label(self.root, background="#2b2b2b")
@@ -44,18 +51,21 @@ class Dota2QueueGUI:
         self.close_label = ttk.Label(self.close_label_bg, text="Ctrl + X to close", font=("Trajan Pro Bold", 8), anchor="center", background="#0e1218", foreground="#818181")
         self.close_label.pack(fill="both", expand=True)
 
-        # Update the message label here with the initial message
-        self.update_message("Ready to Accept Matches")
-
+        # Initialize threads after GUI setup
         self.queue_thread = threading.Thread(target=self.look_for_match)
-        self.queue_thread.start()
-        self.root.withdraw()
-
         self.dota_window_thread = threading.Thread(target=self.check_dota_window_state)
+
+        # Start threads
+        self.queue_thread.start()
         self.dota_window_thread.start()
 
+        # Set initial message
+        self.update_message("Ready to Accept Matches")
 
-    def close_application(self, event=None):
+        # Hotkey for Ctrl+X to close
+        keyboard.add_hotkey('ctrl+x', self.close_application)
+
+    def close_application(self):
         self.tray_thread.stop()
         os._exit(0)
 
@@ -79,19 +89,10 @@ class Dota2QueueGUI:
             self.root.deiconify() if dota2_window and win32gui.IsWindowVisible(dota2_window) and not win32gui.IsIconic(dota2_window) else self.root.withdraw()
             time.sleep(1)
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
+def main():
+    root = tk.Tk()
+    app = Dota2QueueGUI(root)
+    root.mainloop()
 
-root = tk.Tk()
-root.configure(bg="#171d25")
-root.attributes('-alpha', 0.85)
-app = Dota2QueueGUI(root)
-
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
-desired_x, desired_y = 0, 0
-root.geometry(f"300x100+{desired_x}+{desired_y}")
-root.overrideredirect(True)
-root.wm_attributes("-topmost", True)
-root.wm_attributes("-disabled", True)
-root.mainloop()
+if __name__ == "__main__":
+    main()
