@@ -97,7 +97,13 @@ class Dota2QueueGUI:
 def main():
     root = tk.Tk()
     app = Dota2QueueGUI(root)
+
+    # Initialize GUI components before starting threads
     root.mainloop()
+
+    # Start threads after GUI setup
+    app.queue_thread.start()
+    app.dota_window_thread.start()
 
 if __name__ == "__main__":
     main()
