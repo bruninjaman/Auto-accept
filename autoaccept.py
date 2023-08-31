@@ -38,6 +38,8 @@ class Dota2QueueGUI:
         self.accept_image = Image.open(BytesIO(base64.b64decode(BUTTON_ACCEPT_BASE64)))
         tray_icon_image = Image.open(BytesIO(base64.b64decode(TRAY_ICON_BASE64)))
 
+        self.accept_coords = None  # Store accept button coordinates
+
         # Create tray icon menu
         menu = (pystray.MenuItem('Exit', self.close_application),)
         self.tray_thread = TrayIconThread(tray_icon_image, menu)
@@ -76,12 +78,15 @@ class Dota2QueueGUI:
         while True:
             dota2_window = win32gui.FindWindow(None, "Dota 2")
             if dota2_window and win32gui.IsWindowVisible(dota2_window) and not win32gui.IsIconic(dota2_window):
-                accept_coords = pyautogui.locateCenterOnScreen(self.accept_image, grayscale=True, confidence=0.8)
-                if accept_coords:
-                    pyautogui.click(*accept_coords)
-                    self.update_message("Match Accepted!")
-                    time.sleep(3)
-                    self.update_message("Ready to Accept Matches")
+                self.accept_coords = pyautogui.locateCenterOnScreen(self.accept_image, grayscale=True, confidence=0.8)
+                
+                if self.accept_coords:
+                    self.click_accept_button()
+    def click_accept_button(self):
+        pyautogui.click(*self.accept_coords)
+        self.update_message("Match Accepted!")
+        time.sleep(3)
+        self.update_message("Ready to Accept Matches")
 
     def check_dota_window_state(self):
         while True:
