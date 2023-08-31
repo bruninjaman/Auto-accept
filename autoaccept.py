@@ -10,7 +10,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 import keyboard
-from constants import TRAY_ICON_BASE64, BUTTON_ACCEPT_BASE64
+from constants import TRAY_ICON, BUTTON_ACCEPT
 
 class TrayIconThread(threading.Thread):
     def __init__(self, image, menu):
@@ -35,8 +35,8 @@ class Dota2QueueGUI:
         self.root.wm_attributes("-disabled", True)
 
         # Preload images
-        self.accept_image = Image.open(BytesIO(base64.b64decode(BUTTON_ACCEPT_BASE64)))
-        tray_icon_image = Image.open(BytesIO(base64.b64decode(TRAY_ICON_BASE64)))
+        self.accept_image = Image.open(BytesIO(BUTTON_ACCEPT))
+        tray_icon_image = Image.open(BytesIO(TRAY_ICON))
 
         self.accept_coords = None  # Store accept button coordinates
 
