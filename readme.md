@@ -1,6 +1,6 @@
 
 ## Project Based on
-[![Forks][forks-shield]][https://github.com/superoo7/dota2-auto-accept]>
+[![Forks][forks-shield]][https://github.com/superoo7/dota2-auto-accept]
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
