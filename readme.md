@@ -23,6 +23,8 @@ pip install -r requirements.txt
 python autoaccept.py
 ```
 
+1. Or just download the .exe binary on folder 'dist/' and run it.
+
 
 ### How to build it
 
